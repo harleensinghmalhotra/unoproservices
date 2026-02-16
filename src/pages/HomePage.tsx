@@ -159,9 +159,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent"></div>
         </div>
 
-        {/* Booking banner */}
-        <div className="absolute top-16 sm:top-6 left-1/2 -translate-x-1/2 z-20">
-          <div className="bg-brand-primary text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-full shadow-xl text-xs sm:text-sm md:text-base font-bold tracking-wide flex items-center gap-2">
+        {/* ✅ Booking banner (FIXED FOR MOBILE) */}
+        <div className="absolute bottom-6 sm:bottom-auto sm:top-6 left-1/2 -translate-x-1/2 z-20 w-full px-4 sm:px-0 flex justify-center">
+          <div className="bg-brand-primary text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-full shadow-xl text-xs sm:text-sm md:text-base font-bold tracking-wide flex items-center gap-2 max-w-[360px] sm:max-w-none text-center justify-center">
             🍂 Booking Now Open — Lawn, Cleanup & Snow Service
           </div>
         </div>
@@ -288,7 +288,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             })}
           </div>
 
-          {/* ✅ FIX: force scroll to top by passing undefined explicitly */}
           <div className="text-center mt-8 sm:mt-12">
             <button
               onClick={() => onNavigate('services', undefined)}
