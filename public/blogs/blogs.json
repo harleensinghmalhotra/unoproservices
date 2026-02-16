@@ -1,9 +1,30 @@
 [
   {
-    "id": 5,
-    "slug": "backyard-drainage-solutions-chicago",
-    "title": "3 Proven Landscape Drainage Solutions for Flooded Backyards in Chicago",
-    "date": "2024-03-09",
-    "intro": "Heavy rainstorms in Chicago often leave backyards muddy, flooded, and unusable. Poor grading, clay soil, and compacted turf all worsen drainage issues. These three professional landscape solutions can transform a swampy yard into a dry, functional outdoor space."
+    "id": 1,
+    "slug": "test-blog",
+    "title": "Test Blog – KC Construction",
+    "date": "2026-01-21",
+    "intro": "This is a test blog to verify the blog system is working."
+  },
+  {
+    "id": 2,
+    "slug": "how-to-choose-the-right-general-contractor-in-chicago-pricing-breakdown",
+    "title": "How to Choose the Right General Contractor in Chicago – Pricing Breakdown",
+    "date": "2026-01-21",
+    "intro": "Embarking on a home renovation in Chicago is an exciting venture. Whether you're modernizing a classic bungalow in Oak Park or gut-renovating a condo in the Loop, understanding the costs involved is the critical first step. A detailed pricing breakdown from a general contractor isn't just a number—it's a roadmap for your project's success. As seasoned Chicago contractors, we believe transparency is the foundation of any great build."
+  },
+  {
+    "id": 3,
+    "slug": "how-to-choose-the-right-general-contractor-in-chicago-process-explained",
+    "title": "How to Choose the Right General Contractor in Chicago – Process Explained",
+    "date": "2026-01-21",
+    "intro": "Embarking on a home renovation or construction project in Chicago is an exciting venture. But turning your vision into a durable, code-compliant reality requires more than just good ideas—it requires a skilled partner. Choosing the right general contractor in Chicago is the single most important decision you'll make. This guide explains the process from start to finish, so you can hire with confidence and ensure your project’s success."
+  },
+  {
+    "id": 4,
+    "slug": "how-much-does-weekly-lawn-mowing-cost-in-chicago-2025-guide",
+    "title": "How Much Does Weekly Lawn Mowing Cost in Chicago? (2025 Guide)",
+    "date": "2026-02-16",
+    "intro": "A pristine, well-manicured lawn is the hallmark of a proud Chicago homeowner. But during our intense, compressed growing season, keeping up can feel like a second job. If you're considering professional help, your first question is likely about cost. This 2025 guide breaks down the real costs of weekly lawn mowing services across Chicagoland, so you can make an informed investment in your property's curb appeal."
   }
 ]
