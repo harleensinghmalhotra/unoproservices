@@ -30,11 +30,16 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
       setLoading(true);
 
       try {
-        // ✅ 1) Load blog list (meta)
+        // ✅ 1) Load blogs.json (META LIST)
         const listRes = await fetch(
-          'https://raw.githubusercontent.com/harleensinghmalhotra/unoproservices/main/public/blogs/blogs.json',
+          'https://raw.githubusercontent.com/harleensinghmalhotra/unoproservices/main/public/blogs/blogs.json?ts=' +
+            Date.now(),
           { cache: 'no-store' }
         );
+
+        if (!listRes.ok) {
+          throw new Error('blogs.json not found');
+        }
 
         const listData: BlogPostMeta[] = await listRes.json();
 
@@ -47,24 +52,38 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
 
         setAllPosts(sortedList);
 
-        // ✅ 2) Load full post JSON (NOT HTML)
+        // ✅ Find current meta
+        const meta = sortedList.find((p) => p.slug === slug) || null;
+
+        if (!meta) {
+          throw new Error(`No metadata found in blogs.json for slug: ${slug}`);
+        }
+
+        // ✅ 2) Load post file as TEXT (because it is raw HTML)
         const postRes = await fetch(
-          `https://raw.githubusercontent.com/harleensinghmalhotra/unoproservices/main/public/blogs/${slug}.json`,
+          `https://raw.githubusercontent.com/harleensinghmalhotra/unoproservices/main/public/blogs/${slug}.json?ts=${Date.now()}`,
           { cache: 'no-store' }
         );
 
         if (!postRes.ok) {
-          throw new Error(`Post JSON not found for slug: ${slug}`);
+          throw new Error(`Post file not found for slug: ${slug}`);
         }
 
-        const postData: BlogPostFull = await postRes.json();
+        const htmlContent = await postRes.text();
 
-        // ✅ Must contain content
-        if (!postData.content || typeof postData.content !== 'string') {
-          throw new Error(`Post JSON missing content field for slug: ${slug}`);
+        // ✅ If GitHub returns an HTML error page, it will still start with "<"
+        // But we WANT HTML content. The only bad case is a GitHub 404 HTML page.
+        if (!htmlContent || htmlContent.length < 20) {
+          throw new Error(`Post file empty for slug: ${slug}`);
         }
 
-        setPost(postData);
+        // ✅ Build final post object (meta + html)
+        const fullPost: BlogPostFull = {
+          ...meta,
+          content: htmlContent
+        };
+
+        setPost(fullPost);
 
         // ✅ Related posts
         const related = sortedList.filter((p) => p.slug !== slug).slice(0, 3);
@@ -187,7 +206,7 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
             </p>
           </header>
 
-          {/* CONTENT */}
+          {/* CONTENT (RAW HTML) */}
           <div
             className="prose prose-lg sm:prose-xl max-w-none my-10"
             style={{ lineHeight: '1.75' }}
