@@ -46,8 +46,10 @@ export default function BlogPage({ onNavigate, page = 1 }: BlogPageProps) {
     return b.id - a.id;
   });
 
-  const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE);
+  // ✅ Prevent divide-by-zero issues
+  const totalPages = Math.max(1, Math.ceil(sortedPosts.length / POSTS_PER_PAGE));
   const currentPage = Math.min(Math.max(1, page), totalPages);
+
   const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
   const endIndex = startIndex + POSTS_PER_PAGE;
   const currentPosts = sortedPosts.slice(startIndex, endIndex);
@@ -199,7 +201,7 @@ export default function BlogPage({ onNavigate, page = 1 }: BlogPageProps) {
           )}
 
           {/* PAGINATION */}
-          {totalPages > 1 && (
+          {sortedPosts.length > 0 && totalPages > 1 && (
             <div className="mt-12 sm:mt-16 flex flex-wrap items-center justify-center gap-2">
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
@@ -231,8 +233,9 @@ export default function BlogPage({ onNavigate, page = 1 }: BlogPageProps) {
 
           <div className="mt-12 sm:mt-16 text-center">
             <p className="text-base sm:text-lg text-gray-600 mb-4">
-              Showing {sortedPosts.length === 0 ? 0 : startIndex + 1}–
-              {Math.min(endIndex, sortedPosts.length)} of {sortedPosts.length} posts
+              {sortedPosts.length === 0
+                ? 'Showing 0 of 0 posts'
+                : `Showing ${startIndex + 1}–${Math.min(endIndex, sortedPosts.length)} of ${sortedPosts.length} posts`}
             </p>
           </div>
         </div>
