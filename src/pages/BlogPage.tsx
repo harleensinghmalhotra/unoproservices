@@ -22,7 +22,7 @@ export default function BlogPage({ onNavigate, page = 1 }: BlogPageProps) {
 
   useEffect(() => {
     fetch(
-      "https://raw.githubusercontent.com/harleensinghmalhotra/unoproservices/main/public/blogs/blogs.json",
+      'https://raw.githubusercontent.com/harleensinghmalhotra/unoproservices/main/public/blogs/blogs.json',
       { cache: 'no-store' } // ✅ CRITICAL FIX: disable caching
     )
       .then((r) => r.json())
@@ -119,15 +119,37 @@ export default function BlogPage({ onNavigate, page = 1 }: BlogPageProps) {
         <link rel="canonical" href="https://unoproservices.com/blog" />
       </Helmet>
 
-      {/* HERO */}
-      <section className="relative h-[250px] sm:h-[300px] md:h-[350px] flex items-center bg-gray-900">
+      {/* ✅ HERO (MATCHES SERVICES PAGE STYLE) */}
+      <section className="relative h-[300px] sm:h-[350px] md:h-[400px] flex items-center bg-black">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/banner2.jpg')" }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40"></div>
+        </div>
+
         <div className="container mx-auto px-4 relative z-10">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4">
-            Chicago Lawn & Property Blog
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl">
-            Lawn care, snow service, and seasonal property tips for Chicago homeowners
-          </p>
+          <div className="max-w-3xl">
+            <h1
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-white"
+              style={{
+                textShadow:
+                  '3px 3px 12px rgba(0,0,0,0.95), 0 0 30px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.8)'
+              }}
+            >
+              Chicago Lawn & Property Blog
+            </h1>
+
+            <p
+              className="text-base sm:text-lg md:text-xl text-white"
+              style={{
+                textShadow:
+                  '2px 2px 10px rgba(0,0,0,0.95), 0 0 25px rgba(0,0,0,0.9), 0 0 35px rgba(0,0,0,0.7)'
+              }}
+            >
+              Lawn care, snow service, and seasonal property tips for Chicago homeowners
+            </p>
+          </div>
         </div>
       </section>
 
@@ -209,8 +231,8 @@ export default function BlogPage({ onNavigate, page = 1 }: BlogPageProps) {
 
           <div className="mt-12 sm:mt-16 text-center">
             <p className="text-base sm:text-lg text-gray-600 mb-4">
-              Showing {startIndex + 1}–{Math.min(endIndex, sortedPosts.length)} of{' '}
-              {sortedPosts.length} posts
+              Showing {sortedPosts.length === 0 ? 0 : startIndex + 1}–
+              {Math.min(endIndex, sortedPosts.length)} of {sortedPosts.length} posts
             </p>
           </div>
         </div>
