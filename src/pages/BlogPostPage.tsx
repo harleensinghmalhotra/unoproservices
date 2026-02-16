@@ -7,49 +7,67 @@ interface BlogPostPageProps {
   slug: string;
 }
 
-interface BlogPost {
+interface BlogPostMeta {
   id: number;
   slug: string;
   title: string;
   date: string;
   intro: string;
+}
+
+interface BlogPostFull extends BlogPostMeta {
   content: string;
 }
 
 export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
+  const [post, setPost] = useState<BlogPostFull | null>(null);
+  const [allPosts, setAllPosts] = useState<BlogPostMeta[]>([]);
   const [loading, setLoading] = useState(true);
-  const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
+  const [relatedPosts, setRelatedPosts] = useState<BlogPostMeta[]>([]);
 
   useEffect(() => {
     const load = async () => {
       setLoading(true);
 
       try {
-        // ✅ Load ALL blog posts from ONE FILE (your current repo structure)
-        const res = await fetch(
-          'https://raw.githubusercontent.com/harleensinghmalhotra/unoproservices/main/public/blog-posts.json',
+        // ✅ 1) Load blog list (meta)
+        const listRes = await fetch(
+          'https://raw.githubusercontent.com/harleensinghmalhotra/unoproservices/main/public/blogs/blogs.json',
           { cache: 'no-store' }
         );
 
-        const data: BlogPost[] = await res.json();
+        const listData: BlogPostMeta[] = await listRes.json();
 
         // ✅ Sort newest → oldest
-        const sorted = [...data].sort((a, b) => {
+        const sortedList = [...listData].sort((a, b) => {
           const dateDiff = new Date(b.date).getTime() - new Date(a.date).getTime();
           if (dateDiff !== 0) return dateDiff;
           return b.id - a.id;
         });
 
-        setAllPosts(sorted);
+        setAllPosts(sortedList);
 
-        // ✅ Find current post by slug
-        const current = sorted.find((p) => p.slug === slug) || null;
-        setPost(current);
+        // ✅ 2) Load full post JSON (NOT HTML)
+        const postRes = await fetch(
+          `https://raw.githubusercontent.com/harleensinghmalhotra/unoproservices/main/public/blogs/${slug}.json`,
+          { cache: 'no-store' }
+        );
 
-        // ✅ Related posts (exclude current)
-        const related = sorted.filter((p) => p.slug !== slug).slice(0, 3);
+        if (!postRes.ok) {
+          throw new Error(`Post JSON not found for slug: ${slug}`);
+        }
+
+        const postData: BlogPostFull = await postRes.json();
+
+        // ✅ Must contain content
+        if (!postData.content || typeof postData.content !== 'string') {
+          throw new Error(`Post JSON missing content field for slug: ${slug}`);
+        }
+
+        setPost(postData);
+
+        // ✅ Related posts
+        const related = sortedList.filter((p) => p.slug !== slug).slice(0, 3);
         setRelatedPosts(related);
       } catch (e) {
         console.error('Failed to load blog post:', e);
@@ -121,7 +139,7 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
         <link rel="canonical" href={`https://unoproservices.com/blog/${post.slug}`} />
       </Helmet>
 
-      {/* ✅ HERO (MATCHES SERVICES + BLOG LIST STYLE) */}
+      {/* HERO */}
       <section className="relative h-[300px] sm:h-[350px] md:h-[400px] flex items-center bg-black">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -144,9 +162,7 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
 
             <div
               className="flex items-center gap-2 text-white/90 text-sm sm:text-base"
-              style={{
-                textShadow: '2px 2px 10px rgba(0,0,0,0.9)'
-              }}
+              style={{ textShadow: '2px 2px 10px rgba(0,0,0,0.9)' }}
             >
               <Calendar size={18} />
               <time dateTime={post.date}>{formatDate(post.date)}</time>
@@ -171,7 +187,7 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
             </p>
           </header>
 
-          {/* FULL HTML CONTENT */}
+          {/* CONTENT */}
           <div
             className="prose prose-lg sm:prose-xl max-w-none my-10"
             style={{ lineHeight: '1.75' }}
