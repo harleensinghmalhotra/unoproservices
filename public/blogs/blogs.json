@@ -1,33 +1,5 @@
 [
   {
-    "id": 1,
-    "slug": "test-blog",
-    "title": "Test Blog – Uno Pro Services",
-    "date": "2026-01-21",
-    "intro": "This is a test blog to verify the blog system is working."
-  },
-  {
-    "id": 2,
-    "slug": "how-to-choose-the-right-general-contractor-in-chicago-pricing-breakdown",
-    "title": "How to Choose the Right General Contractor in Chicago – Pricing Breakdown",
-    "date": "2026-01-21",
-    "intro": "Embarking on a home renovation in Chicago is an exciting venture. Whether you're modernizing a classic bungalow in Oak Park or gut-renovating a condo in the Loop, understanding the costs involved is the critical first step. A detailed pricing breakdown from a general contractor isn't just a number—it's a roadmap for your project's success. As seasoned Chicago contractors, we believe transparency is the foundation of any great build."
-  },
-  {
-    "id": 3,
-    "slug": "how-to-choose-the-right-general-contractor-in-chicago-process-explained",
-    "title": "How to Choose the Right General Contractor in Chicago – Process Explained",
-    "date": "2026-01-21",
-    "intro": "Embarking on a home renovation or construction project in Chicago is an exciting venture. But turning your vision into a durable, code-compliant reality requires more than just good ideas—it requires a skilled partner. Choosing the right general contractor in Chicago is the single most important decision you'll make. This guide explains the process from start to finish, so you can hire with confidence and ensure your project’s success."
-  },
-  {
-    "id": 4,
-    "slug": "what-really-happens-during-a-chicago-patio-installation-step-by-step-breakdown",
-    "title": "What Really Happens During a Chicago Patio Installation: Step-by-Step Breakdown",
-    "date": "2026-02-03",
-    "intro": "Dreaming of a beautiful new patio for your Chicago home? It’s an exciting investment that transforms your backyard into a functional outdoor living space. But the thought of a major hardscape project can be daunting. What actually happens after you sign the contract? As Chicago's hardscape experts, we believe in complete transparency. Understanding the process not only demystifies the construction but also highlights why professional installation is critical for a patio that lasts through our city's demanding freeze-thaw cycles. This step-by-step guide pulls back the curtain on our meticulous patio installation process."
-  },
-  {
     "id": 5,
     "slug": "backyard-drainage-solutions-chicago",
     "title": "3 Proven Landscape Drainage Solutions for Flooded Backyards in Chicago",
