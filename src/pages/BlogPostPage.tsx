@@ -59,7 +59,7 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
           throw new Error(`No metadata found in blogs.json for slug: ${slug}`);
         }
 
-        // ✅ 2) Load post file as TEXT (because it is raw HTML)
+        // ✅ 2) Load post file as JSON (NOT TEXT)
         const postRes = await fetch(
           `https://raw.githubusercontent.com/harleensinghmalhotra/unoproservices/main/public/blogs/${slug}.json?ts=${Date.now()}`,
           { cache: 'no-store' }
@@ -69,18 +69,17 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
           throw new Error(`Post file not found for slug: ${slug}`);
         }
 
-        const htmlContent = await postRes.text();
+        // ✅ Parse JSON file
+        const postJson = await postRes.json();
 
-        // ✅ If GitHub returns an HTML error page, it will still start with "<"
-        // But we WANT HTML content. The only bad case is a GitHub 404 HTML page.
-        if (!htmlContent || htmlContent.length < 20) {
-          throw new Error(`Post file empty for slug: ${slug}`);
+        if (!postJson?.content || postJson.content.length < 20) {
+          throw new Error(`Post content missing for slug: ${slug}`);
         }
 
-        // ✅ Build final post object (meta + html)
+        // ✅ Build final post object (meta + html content)
         const fullPost: BlogPostFull = {
           ...meta,
-          content: htmlContent
+          content: postJson.content,
         };
 
         setPost(fullPost);
@@ -106,7 +105,7 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     });
   };
 
@@ -117,7 +116,7 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
 
     return {
       prev: idx > 0 ? allPosts[idx - 1] : null,
-      next: idx < allPosts.length - 1 ? allPosts[idx + 1] : null
+      next: idx < allPosts.length - 1 ? allPosts[idx + 1] : null,
     };
   }, [post, allPosts]);
 
@@ -173,7 +172,7 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
               className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
               style={{
                 textShadow:
-                  '3px 3px 12px rgba(0,0,0,0.95), 0 0 30px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.8)'
+                  '3px 3px 12px rgba(0,0,0,0.95), 0 0 30px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.8)',
               }}
             >
               {post.title}
@@ -206,7 +205,7 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
             </p>
           </header>
 
-          {/* CONTENT (RAW HTML) */}
+          {/* CONTENT (HTML) */}
           <div
             className="prose prose-lg sm:prose-xl max-w-none my-10"
             style={{ lineHeight: '1.75' }}
