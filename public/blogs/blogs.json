@@ -1,44 +1,30 @@
 [
   {
     "id": 1,
-    "slug": "test-blog",
-    "title": "Test Blog – KC Construction",
-    "date": "2026-01-21",
-    "intro": "This is a test blog to verify the blog system is working."
+    "slug": "why-professional-edging-makes-a-huge-difference-for-chicago-lawns",
+    "title": "Why Professional Edging Makes a Huge Difference for Chicago Lawns",
+    "date": "2026-02-16",
+    "intro": "In Chicago, a well-kept home exterior says a lot. While a lush, green lawn is the foundation, it’s the fine details that truly elevate your property's curb appeal. Professional lawn edging and trimming is the secret weapon for achieving that crisp, manicured look that sets a home apart, creating a sharp frame for your landscape."
   },
   {
     "id": 2,
-    "slug": "how-to-choose-the-right-general-contractor-in-chicago-pricing-breakdown",
-    "title": "How to Choose the Right General Contractor in Chicago – Pricing Breakdown",
-    "date": "2026-01-21",
-    "intro": "Embarking on a home renovation in Chicago is an exciting venture. Whether you're modernizing a classic bungalow in Oak Park or gut-renovating a condo in the Loop, understanding the costs involved is the critical first step. A detailed pricing breakdown from a general contractor isn't just a number—it's a roadmap for your project's success. As seasoned Chicago contractors, we believe transparency is the foundation of any great build."
-  },
-  {
-    "id": 3,
-    "slug": "how-to-choose-the-right-general-contractor-in-chicago-process-explained",
-    "title": "How to Choose the Right General Contractor in Chicago – Process Explained",
-    "date": "2026-01-21",
-    "intro": "Embarking on a home renovation or construction project in Chicago is an exciting venture. But turning your vision into a durable, code-compliant reality requires more than just good ideas—it requires a skilled partner. Choosing the right general contractor in Chicago is the single most important decision you'll make. This guide explains the process from start to finish, so you can hire with confidence and ensure your project’s success."
-  },
-  {
-    "id": 4,
-    "slug": "weekly-vs-bi-weekly-lawn-mowing-which-schedule-is-best-for-chicago-lawns",
-    "title": "Weekly vs. Bi-Weekly Lawn Mowing: Which Schedule Is Best for Chicago Lawns?",
-    "date": "2026-02-16",
-    "intro": "A well-maintained lawn is more than just grass; it’s the first impression your Chicago property makes. As general contractors, we know that curb appeal directly impacts home value. Homeowners often ask us a simple but crucial question: is it better to mow weekly or every other week? The answer isn't just about saving time or money—it's about the long-term health of your Chicagoland lawn."
-  },
-  {
-    "id": 5,
     "slug": "lawn-care-for-chicago-rental-properties-why-bi-weekly-service-works-best",
     "title": "Lawn Care for Chicago Rental Properties: Why Bi-Weekly Service Works Best",
     "date": "2026-02-16",
     "intro": "As a Chicago landlord or property manager, your focus is on protecting your investment and maximizing returns. Neglected landscaping not only diminishes curb appeal but can lead to city fines and tenant disputes. For most rental properties in Chicagoland, a bi-weekly lawn maintenance schedule provides the perfect balance of cost, compliance, and consistent quality, ensuring your asset always looks its best."
   },
   {
-    "id": 6,
-    "slug": "why-professional-edging-makes-a-huge-difference-for-chicago-lawns",
-    "title": "Why Professional Edging Makes a Huge Difference for Chicago Lawns",
+    "id": 3,
+    "slug": "weekly-vs-bi-weekly-lawn-mowing-which-schedule-is-best-for-chicago-lawns",
+    "title": "Weekly vs. Bi-Weekly Lawn Mowing: Which Schedule Is Best for Chicago Lawns?",
     "date": "2026-02-16",
-    "intro": "In Chicago, a well-kept home exterior says a lot. While a lush, green lawn is the foundation, it’s the fine details that truly elevate your property's curb appeal. Professional lawn edging and trimming is the secret weapon for achieving that crisp, manicured look that sets a home apart, creating a sharp frame for your landscape."
+    "intro": "A well-maintained lawn is more than just grass; it’s the first impression your Chicago property makes. As general contractors, we know that curb appeal directly impacts home value. Homeowners often ask us a simple but crucial question: is it better to mow weekly or every other week? The answer isn't just about saving time or money—it's about the long-term health of your Chicagoland lawn."
+  },
+  {
+    "id": 4,
+    "slug": "diy-fertilizing-vs-hiring-a-pro-what-s-better-for-chicago-lawns",
+    "title": "DIY Fertilizing vs. Hiring a Pro: What's Better for Chicago Lawns?",
+    "date": "2026-02-16",
+    "intro": "A lush, green lawn is the hallmark of a well-maintained Chicago home, significantly boosting curb appeal and property value. After a long, harsh Illinois winter, every homeowner is eager to see that vibrant green return. But achieving it brings a common question: should you handle lawn fertilizing yourself or hire a professional? As contractors who manage property transformations from the foundation up, we understand the value of getting every detail right."
   }
 ]
