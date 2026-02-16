@@ -22,7 +22,7 @@ export default function BlogPage({ onNavigate, page = 1 }: BlogPageProps) {
 
   useEffect(() => {
     fetch(
-      'https://raw.githubusercontent.com/harleensinghmalhotra/unoproservices/main/public/blogs/blogs.json',
+      'https://raw.githubusercontent.com/harleensinghmalhotra/unoproservices/main/public/blogs/blogs.json?ts=' + Date.now(),
       { cache: 'no-store' } // ✅ CRITICAL FIX: disable caching
     )
       .then((r) => r.json())
