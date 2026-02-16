@@ -41,10 +41,16 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
           throw new Error('blogs.json not found');
         }
 
-        const listData: BlogPostMeta[] = await listRes.json();
+        const listData = await listRes.json();
+
+        if (!Array.isArray(listData)) {
+          throw new Error('blogs.json is not an array');
+        }
+
+        const typedList = listData as BlogPostMeta[];
 
         // ✅ Sort newest → oldest
-        const sortedList = [...listData].sort((a, b) => {
+        const sortedList = [...typedList].sort((a, b) => {
           const dateDiff = new Date(b.date).getTime() - new Date(a.date).getTime();
           if (dateDiff !== 0) return dateDiff;
           return b.id - a.id;
@@ -59,7 +65,7 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
           throw new Error(`No metadata found in blogs.json for slug: ${slug}`);
         }
 
-        // ✅ 2) Load post file as JSON (NOT TEXT)
+        // ✅ 2) Load post file as JSON
         const postRes = await fetch(
           `https://raw.githubusercontent.com/harleensinghmalhotra/unoproservices/main/public/blogs/${slug}.json?ts=${Date.now()}`,
           { cache: 'no-store' }
@@ -69,7 +75,6 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
           throw new Error(`Post file not found for slug: ${slug}`);
         }
 
-        // ✅ Parse JSON file
         const postJson = await postRes.json();
 
         if (!postJson?.content || postJson.content.length < 20) {
@@ -79,7 +84,7 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
         // ✅ Build final post object (meta + html content)
         const fullPost: BlogPostFull = {
           ...meta,
-          content: postJson.content,
+          content: postJson.content
         };
 
         setPost(fullPost);
@@ -105,7 +110,7 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric',
+      day: 'numeric'
     });
   };
 
@@ -116,7 +121,7 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
 
     return {
       prev: idx > 0 ? allPosts[idx - 1] : null,
-      next: idx < allPosts.length - 1 ? allPosts[idx + 1] : null,
+      next: idx < allPosts.length - 1 ? allPosts[idx + 1] : null
     };
   }, [post, allPosts]);
 
@@ -172,7 +177,7 @@ export default function BlogPostPage({ onNavigate, slug }: BlogPostPageProps) {
               className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
               style={{
                 textShadow:
-                  '3px 3px 12px rgba(0,0,0,0.95), 0 0 30px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.8)',
+                  '3px 3px 12px rgba(0,0,0,0.95), 0 0 30px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.8)'
               }}
             >
               {post.title}
