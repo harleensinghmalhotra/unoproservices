@@ -149,7 +149,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative h-[450px] sm:h-[550px] md:h-[650px] lg:h-[700px] flex items-center pb-24 sm:pb-0">
+      <section className="relative h-[600px] sm:h-[580px] md:h-[650px] lg:h-[700px] flex items-center">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -159,17 +159,17 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent"></div>
         </div>
 
-        {/* Booking banner (MOBILE SAFE) */}
-        <div className="absolute bottom-8 sm:bottom-auto sm:top-6 left-1/2 -translate-x-1/2 z-20 w-full px-4 sm:px-0 flex justify-center pointer-events-none">
-          <div className="bg-brand-primary text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-full shadow-xl text-xs sm:text-sm md:text-base font-bold tracking-wide flex items-center gap-2 max-w-[360px] sm:max-w-none text-center justify-center">
-            🍂 Booking Now Open — Lawn, Cleanup & Snow Service
-          </div>
-        </div>
-
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl">
+            {/* Booking banner (INSIDE HERO / BANNER AREA, NOT HEADER) */}
+            <div className="mb-5 sm:mb-6">
+              <div className="inline-flex bg-brand-primary text-white px-4 sm:px-6 py-2.5 rounded-full shadow-xl text-xs sm:text-sm md:text-base font-bold tracking-wide items-center gap-2">
+                🍂 Booking Now Open — Lawn, Cleanup & Snow Service
+              </div>
+            </div>
+
             <h1
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-white leading-tight"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-6 text-white leading-tight"
               style={{
                 textShadow:
                   '3px 3px 12px rgba(0,0,0,0.95), 0 0 30px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.8)'
@@ -178,8 +178,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               Lawn Care, Snow Shoveling & Property Services in Chicago, IL
             </h1>
 
+            {/* Desktop paragraph */}
             <p
-              className="text-base sm:text-lg md:text-xl text-white mb-6 sm:mb-8 max-w-2xl"
+              className="hidden sm:block text-base sm:text-lg md:text-xl text-white mb-6 sm:mb-8 max-w-2xl"
               style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.9)' }}
             >
               Uno Pro Services provides dependable <strong>weekly lawn maintenance</strong>,{' '}
@@ -190,10 +191,19 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <span className="font-semibold">Se Habla Español.</span>
             </p>
 
+            {/* Mobile short line */}
+            <p
+              className="block sm:hidden text-sm text-white/90 mb-5 max-w-sm"
+              style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.9)' }}
+            >
+              Weekly lawn care, cleanups & snow shoveling.{' '}
+              <span className="font-semibold">Se Habla Español.</span>
+            </p>
+
             <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
               <button
                 onClick={() => onNavigate('contact')}
-                className="bg-brand-primary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-opacity-90 transition-all font-bold text-base sm:text-lg shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:scale-105 flex items-center justify-center gap-2"
+                className="bg-brand-primary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-opacity-90 transition-all font-bold text-sm sm:text-lg shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:scale-105 flex items-center justify-center gap-2"
               >
                 Get Free Quote
                 <ArrowRight size={18} className="sm:w-5 sm:h-5" />
@@ -201,7 +211,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
               <a
                 href="tel:17733768058"
-                className="bg-white text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-gray-100 transition-all font-bold text-base sm:text-lg shadow-2xl hover:scale-105 border-2 border-white flex items-center justify-center gap-2"
+                className="bg-white text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-gray-100 transition-all font-bold text-sm sm:text-lg shadow-2xl hover:scale-105 border-2 border-white flex items-center justify-center gap-2"
               >
                 <Phone size={18} className="sm:w-5 sm:h-5" />
                 (773) 376-8058
