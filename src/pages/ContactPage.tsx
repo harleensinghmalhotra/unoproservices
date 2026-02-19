@@ -25,8 +25,12 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
     service: '',
     message: ''
   });
+
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [siteInfo, setSiteInfo] = useState<SiteConfig | null>(null);
 
   useEffect(() => {
@@ -48,26 +52,35 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
+
     if (!formData.name.trim()) newErrors.name = 'Name is required';
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email';
     }
+
     if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
     if (!formData.service) newErrors.service = 'Please select a service';
     if (!formData.message.trim()) newErrors.message = 'Message is required';
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // ⭐⭐⭐⭐⭐ UPDATED WEBHOOK SUBMISSION CODE ⭐⭐⭐⭐⭐
+  // ✅ UPDATED: Proper webhook submission + error handling
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError('');
+    setIsSubmitted(false);
+
     if (!validateForm()) return;
 
     try {
-      await fetch('https://app.10xspeed.in/webhook/free-quote-form', {
+      setIsSubmitting(true);
+
+      const res = await fetch('https://app.10xspeed.in/webhook/unoproservices-free-quote', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -75,21 +88,33 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
         body: JSON.stringify(formData)
       });
 
+      if (!res.ok) {
+        throw new Error(`Webhook failed: ${res.status}`);
+      }
+
       setIsSubmitted(true);
       setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch (error) {
       console.error('Webhook submission failed:', error);
+      setSubmitError(
+        'Something went wrong. Please try again, or call us directly.'
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   };
-  // ⭐⭐⭐⭐⭐ END UPDATED CODE ⭐⭐⭐⭐⭐
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
+
     setFormData((prev) => ({ ...prev, [name]: value }));
+
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
+    if (submitError) setSubmitError('');
   };
 
   if (!siteInfo) return <div className="p-10 text-center text-gray-600">Loading...</div>;
@@ -113,7 +138,6 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
             backgroundImage: "url('/1.png')"
           }}
         >
-          {/* ✅ Same gradient overlay as About/Gallery */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/30"></div>
         </div>
 
@@ -228,6 +252,12 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                   </div>
                 )}
 
+                {submitError && (
+                  <div className="mb-6 bg-red-50 border border-red-200 text-red-800 px-4 sm:px-6 py-3 sm:py-4 rounded-lg">
+                    <p className="font-semibold text-sm sm:text-base">{submitError}</p>
+                  </div>
+                )}
+
                 <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
                   {/* NAME */}
                   <div>
@@ -270,9 +300,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                         }`}
                         placeholder="john@company.com"
                       />
-                      {errors.email && (
-                        <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-                      )}
+                      {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                     </div>
 
                     <div>
@@ -290,9 +318,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                         }`}
                         placeholder="(555) 123-4567"
                       />
-                      {errors.phone && (
-                        <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
-                      )}
+                      {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                     </div>
                   </div>
 
@@ -346,10 +372,13 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                   {/* BUTTON */}
                   <button
                     type="submit"
-                    className="w-full bg-brand-primary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-opacity-90 transition-all font-semibold text-base sm:text-lg shadow-lg flex items-center justify-center gap-2"
+                    disabled={isSubmitting}
+                    className={`w-full bg-brand-primary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all font-semibold text-base sm:text-lg shadow-lg flex items-center justify-center gap-2 ${
+                      isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-opacity-90'
+                    }`}
                   >
                     <Send size={18} className="sm:w-5 sm:h-5" />
-                    Send Message
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </button>
                 </form>
               </div>
