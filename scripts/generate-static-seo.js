@@ -40,12 +40,22 @@ async function generateStaticSEO() {
             "@type": "BlogPosting",
             "headline": blog.title,
             "description": blog.intro,
-            "image": image,
+            "image": {
+                "@type": "ImageObject",
+                "url": image,
+                "width": 1200,
+                "height": 630
+            },
             "datePublished": blog.date,
+            "dateModified": blog.date, // Add proper modified date if available
             "author": {
                 "@type": "Organization",
                 "name": "Uno Pro Services",
-                "url": "https://unoproservices.com"
+                "url": "https://unoproservices.com",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://unoproservices.com/logo.png"
+                }
             },
             "publisher": {
                 "@type": "Organization",
