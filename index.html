@@ -12,12 +12,13 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "LandscapingService",
+        "@type": ["LandscapingService", "LocalBusiness"],
         "name": "Uno Pro Services",
         "image": "https://unoproservices.com/logo.png",
         "url": "https://unoproservices.com",
         "telephone": "+1-773-562-1366",
         "email": "info@unoproservices.com",
+        "description": "Premium Lawn Care, Landscaping, and Snow Removal Services in Chicago, Cicero, Berwyn, and surrounding suburbs.",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Chicago",
@@ -29,6 +30,20 @@
           "latitude": 41.8781,
           "longitude": -87.6298
         },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "Chicago"
+          },
+          {
+            "@type": "City",
+            "name": "Cicero"
+          },
+          {
+            "@type": "City",
+            "name": "Berwyn"
+          }
+        ],
         "openingHoursSpecification": {
           "@type": "OpeningHoursSpecification",
           "dayOfWeek": [
@@ -42,7 +57,11 @@
           "opens": "07:00",
           "closes": "18:00"
         },
-        "priceRange": "$$"
+        "priceRange": "$$",
+        "sameAs": [
+          "https://www.facebook.com/unoproservices",
+          "https://www.instagram.com/unoproservices"
+        ]
       }
     </script>
   </head>

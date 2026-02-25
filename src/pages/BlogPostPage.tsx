@@ -159,6 +159,60 @@ export default function BlogPostPage() {
         <title>{post.title} | Uno Pro Services</title>
         <meta name="description" content={post.intro} />
         <link rel="canonical" href={`https://unoproservices.com/blog/${post.slug}`} />
+
+        {/* JSON-LD Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": post.title,
+            "description": post.intro,
+            "datePublished": post.date,
+            "author": {
+              "@type": "Organization",
+              "name": "Uno Pro Services"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Uno Pro Services",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://unoproservices.com/uno-pro-services-logo.png"
+              }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": `https://unoproservices.com/blog/${post.slug}`
+            }
+          })}
+        </script>
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://unoproservices.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blog",
+                "item": "https://unoproservices.com/blog"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": post.title,
+                "item": `https://unoproservices.com/blog/${post.slug}`
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       {/* HERO */}

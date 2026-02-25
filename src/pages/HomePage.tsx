@@ -144,6 +144,58 @@ export default function HomePage() {
           content="Uno Pro Services provides lawn maintenance, fertilizing, leaf cleanups, snow shoveling, and gardening across Chicago. Se Habla Español. Call for a free quote."
         />
         <link rel="canonical" href="https://unoproservices.com/" />
+
+        {/* Local Business Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LandscapingService",
+            "name": "Uno Pro Services",
+            "image": "https://unoproservices.com/uno-pro-services-logo.png",
+            "@id": "https://unoproservices.com/#organization",
+            "url": "https://unoproservices.com",
+            "telephone": "+17733768058",
+            "priceRange": "$$",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "364 W 25th St",
+              "addressLocality": "Chicago",
+              "addressRegion": "IL",
+              "postalCode": "60616",
+              "addressCountry": "US"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 41.8475,
+              "longitude": -87.6367
+            },
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "08:00",
+                "closes": "17:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Saturday",
+                "opens": "08:00",
+                "closes": "12:00"
+              }
+            ],
+            "areaServed": [
+              { "@type": "City", "name": "Chicago" },
+              { "@type": "City", "name": "Cicero" },
+              { "@type": "City", "name": "Berwyn" },
+              { "@type": "City", "name": "Oak Park" },
+              { "@type": "City", "name": "Evanston" }
+            ],
+            "sameAs": [
+              "https://www.facebook.com/unoproservices",
+              "https://www.instagram.com/unoproservices"
+            ]
+          })}
+        </script>
       </Helmet>
 
       {/* Hero Section */}
@@ -475,14 +527,14 @@ export default function HomePage() {
                 slug: "how-chicago-landlords-keep-rental-properties-looking-sharp-with-bi-weekly-mowing",
                 title: "How Chicago Landlords Keep Rental Properties Looking Sharp with Bi-Weekly Mowing",
                 date: "2026-02-24",
-                intro: "As a Chicago landlord, managing property maintenance from a distance or alongside a busy schedule is a constant challenge. Curb appeal is your first impression, directly impacting tenant satisfaction and vacancy rates..."
+                intro: "As a Chicago landlord, managing property maintenance from a distance or alongside a busy schedule is a challenge. Curb appeal is your first impression, directly impacting tenant satisfaction and vacancy rates..."
               },
               {
                 id: 11,
                 slug: "chicago-fertilizing-calendar-the-best-months-for-each-application",
                 title: "Chicago Fertilizing Calendar: The Best Months for Each Application",
                 date: "2026-02-23",
-                intro: "Every Chicago homeowner dreams of a lush, vibrant green lawn, but our region's brutal winters and unpredictable summers can make that a serious challenge. Proper fertilization is the key, but it's about more than just spreading pellets—it's about timing..."
+                intro: "Every Chicago homeowner dreams of a lush, vibrant green lawn, but our region's brutal winters and unpredictable summers can make that a serious challenge. Proper fertilization is the key..."
               }
             ].map((post) => (
               <div
@@ -533,8 +585,7 @@ export default function HomePage() {
               Serving Chicago & Nearby Areas
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-white/90">
-              Lawn care, gardening, cleanups, and snow shoveling across the Greater Chicago Metro
-              Area.
+              Lawn care, gardening, cleanups, and snow shoveling across the Greater Chicago Metro Area.
             </p>
           </div>
 
@@ -553,9 +604,9 @@ export default function HomePage() {
             ].map((city, index) => (
               <div
                 key={index}
-                className="text-center p-3 sm:p-4 bg-white/10 rounded-lg backdrop-blur-sm"
+                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg py-3 sm:py-4 px-2 text-center font-semibold text-sm sm:text-base hover:bg-white/20 transition-all"
               >
-                <p className="text-sm sm:text-base md:text-lg font-semibold">{city}</p>
+                {city}
               </div>
             ))}
           </div>
@@ -563,32 +614,30 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-black text-white border-b border-white/15">
+      <section className="py-16 sm:py-20 md:py-24 bg-gray-50">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
-            Need Lawn Care or Snow Service?
-          </h2>
-
-          <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto">
-            Get a free quote from Uno Pro Services. We provide dependable, affordable service for
-            Chicago homes and businesses.
-          </p>
-
-          <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center">
-            <button
-              onClick={() => navigate('/contact')}
-              className="bg-brand-primary text-white px-8 sm:px-10 py-4 sm:py-5 rounded-lg hover:bg-opacity-90 transition-all font-semibold text-base sm:text-lg shadow-xl"
-            >
-              Get Free Quote
-            </button>
-
-            <a
-              href="tel:17733768058"
-              className="bg-white text-gray-900 px-8 sm:px-10 py-4 sm:py-5 rounded-lg hover:bg-gray-100 transition-all font-semibold text-base sm:text-lg shadow-xl flex items-center justify-center gap-2"
-            >
-              <Phone size={18} className="sm:w-5 sm:h-5" />
-              (773) 376-8058
-            </a>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
+              Ready for a Cleaner Property?
+            </h2>
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 sm:mb-10 lg:mb-12">
+              Join 100+ happy clients in Chicago. Get your free, no-obligation quote today and let us
+              handle the hard work.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+              <button
+                onClick={() => navigate('/contact')}
+                className="bg-brand-primary text-white px-8 sm:px-12 py-4 sm:py-5 rounded-lg hover:bg-opacity-90 transition-all font-bold text-lg sm:text-xl shadow-xl hover:scale-105"
+              >
+                Get Free Quote
+              </button>
+              <a
+                href="tel:17733768058"
+                className="bg-white text-gray-900 border-2 border-gray-200 px-8 sm:px-12 py-4 sm:py-5 rounded-lg hover:bg-gray-50 transition-all font-bold text-lg sm:text-xl shadow-md hover:scale-105"
+              >
+                (773) 376-8058
+              </a>
+            </div>
           </div>
         </div>
       </section>
