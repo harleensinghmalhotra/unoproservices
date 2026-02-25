@@ -449,6 +449,82 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Recent From Our Blog */}
+      <section className="py-12 sm:py-16 md:py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10 sm:mb-12 md:mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
+              Lawn Care & Landscape Tips
+            </h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600">
+              Expert advice for maintaining a beautiful property in Chicago
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto mb-12">
+            {[
+              {
+                id: 13,
+                slug: "how-often-should-you-mow-your-lawn-in-chicago-weekly-vs-bi-weekly-explained",
+                title: "How Often Should You Mow Your Lawn in Chicago? Weekly vs. Bi-Weekly Explained",
+                date: "2026-02-25",
+                intro: "For homeowners across Chicagoland, the debate between weekly and bi-weekly lawn mowing is a common one. Achieving that perfect, healthy lawn isn't just about watering; it's about a consistent and proper cutting schedule..."
+              },
+              {
+                id: 12,
+                slug: "how-chicago-landlords-keep-rental-properties-looking-sharp-with-bi-weekly-mowing",
+                title: "How Chicago Landlords Keep Rental Properties Looking Sharp with Bi-Weekly Mowing",
+                date: "2026-02-24",
+                intro: "As a Chicago landlord, managing property maintenance from a distance or alongside a busy schedule is a constant challenge. Curb appeal is your first impression, directly impacting tenant satisfaction and vacancy rates..."
+              },
+              {
+                id: 11,
+                slug: "chicago-fertilizing-calendar-the-best-months-for-each-application",
+                title: "Chicago Fertilizing Calendar: The Best Months for Each Application",
+                date: "2026-02-23",
+                intro: "Every Chicago homeowner dreams of a lush, vibrant green lawn, but our region's brutal winters and unpredictable summers can make that a serious challenge. Proper fertilization is the key, but it's about more than just spreading pellets—it's about timing..."
+              }
+            ].map((post) => (
+              <div
+                key={post.id}
+                onClick={() => {
+                  navigate(`/blog/${post.slug}`);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="bg-gray-50 rounded-xl p-6 shadow-md hover:shadow-xl transition-all cursor-pointer border border-transparent hover:border-brand-primary group"
+              >
+                <div className="text-brand-primary font-bold text-xs uppercase tracking-wider mb-2">
+                  {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition-colors line-clamp-2">
+                  {post.title}
+                </h3>
+                <p className="text-gray-600 text-sm mb-4 line-clamp-3 leading-relaxed">
+                  {post.intro}
+                </p>
+                <div className="inline-flex items-center gap-2 text-brand-primary font-semibold group-hover:gap-3 transition-all">
+                  Read More
+                  <ArrowRight size={16} />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <button
+              onClick={() => {
+                navigate('/blog');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="inline-flex items-center gap-2 text-brand-primary font-bold text-lg hover:underline"
+            >
+              View All Blog Articles
+              <ArrowRight size={20} />
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* Service Areas */}
       <section className="py-12 sm:py-16 md:py-20 bg-brand-primary text-white">
         <div className="container mx-auto px-4">

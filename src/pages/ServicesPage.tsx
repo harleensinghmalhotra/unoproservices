@@ -255,12 +255,27 @@ export default function ServicesPage() {
             </p>
 
             <button
-              onClick={() => navigate('/contact')}
+              onClick={() => {
+                navigate('/contact');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               className="bg-white text-brand-primary px-8 sm:px-10 py-4 sm:py-5 rounded-lg hover:bg-gray-100 transition-all font-semibold text-base sm:text-lg shadow-xl inline-flex items-center gap-2"
             >
               Get Free Quote
               <ArrowRight size={18} className="sm:w-5 sm:h-5" />
             </button>
+
+            <div className="mt-8">
+              <button
+                onClick={() => {
+                  navigate('/blog');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="text-white/80 hover:text-white transition-colors text-sm font-medium underline underline-offset-4"
+              >
+                Looking for lawn tips? Visit our blog
+              </button>
+            </div>
           </div>
         </div>
       </section>
