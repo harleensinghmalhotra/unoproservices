@@ -96,7 +96,6 @@ async function generateStaticSEO() {
             ]
         };
 
-<<<<<<< HEAD
         // Read the actual blog post content
         let postContent = '';
         const postJsonPath = path.resolve(__dirname, `../public/blogs/${slug}.json`);
@@ -115,9 +114,6 @@ async function generateStaticSEO() {
 `;
 
         // Inject metadata and schemas into HTML, and inject content into <div id="root">
-=======
-        // Inject metadata and schemas into HTML
->>>>>>> cc75f3ce46c563745412ee95dfafbd2be5232a40
         let blogHtml = baseHtml
             .replace(/<title>.*?<\/title>/, `<title>${title}</title>`)
             .replace(
@@ -130,13 +126,10 @@ async function generateStaticSEO() {
                 `    <meta property="og:type" content="article" />\n` +
                 `    <script type="application/ld+json">\n${JSON.stringify(jsonLd, null, 2)}\n    </script>\n` +
                 `    <script type="application/ld+json">\n${JSON.stringify(breadcrumbLd, null, 2)}\n    </script>\n  </head>`
-<<<<<<< HEAD
             )
             .replace(
                 /<div id="root"><\/div>/,
                 `<div id="root">${prerenderedBody}</div>`
-=======
->>>>>>> cc75f3ce46c563745412ee95dfafbd2be5232a40
             );
 
         fs.writeFileSync(path.resolve(blogDir, 'index.html'), blogHtml);
