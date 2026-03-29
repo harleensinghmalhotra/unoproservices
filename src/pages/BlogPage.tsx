@@ -1,0 +1,248 @@
+import { Helmet } from 'react-helmet-async';
+import { useEffect, useState } from 'react';
+import { Calendar, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { useNavigate, Link, useSearchParams } from 'react-router-dom';
+
+interface BlogPost {
+  id: number;
+  slug: string;
+  title: string;
+  date: string;
+  intro: string;
+}
+
+export default function BlogPage() {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const POSTS_PER_PAGE = 10;
+
+  const pageParam = searchParams.get('page');
+  const page = pageParam ? parseInt(pageParam) : 1;
+
+  useEffect(() => {
+    fetch(
+      'https://raw.githubusercontent.com/harleensinghmalhotra/unoproservices/main/public/blogs/blogs.json?ts=' +
+      Date.now(),
+      { cache: 'no-store' }
+    )
+      .then((r) => r.json())
+      .then((data: BlogPost[]) => {
+        setPosts(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Failed to load blog posts:', err);
+        setLoading(false);
+      });
+  }, []);
+
+  const sortedPosts = [...posts].sort((a, b) => {
+    const dateDiff = new Date(b.date).getTime() - new Date(a.date).getTime();
+    if (dateDiff !== 0) return dateDiff;
+    return b.id - a.id;
+  });
+
+  const totalPages = Math.max(1, Math.ceil(sortedPosts.length / POSTS_PER_PAGE));
+  const currentPage = Math.min(Math.max(1, page), totalPages);
+
+  const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+  const endIndex = startIndex + POSTS_PER_PAGE;
+  const currentPosts = sortedPosts.slice(startIndex, endIndex);
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  const handlePageChange = (newPage: number) => {
+    navigate(`/blog?page=${newPage}`);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const renderPagination = () => {
+    const pages = [];
+    const maxVisiblePages = 5;
+
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+    if (endPage - startPage < maxVisiblePages - 1) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(
+        <button
+          key={i}
+          onClick={() => handlePageChange(i)}
+          className={`px-3 py-2 sm:px-4 sm:py-2 rounded-lg transition-all text-sm sm:text-base ${i === currentPage
+              ? 'bg-brand-primary text-white font-semibold'
+              : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
+            }`}
+        >
+          {i}
+        </button>
+      );
+    }
+
+    return pages;
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-xl text-gray-600">Loading blog posts...</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-white">
+      <Helmet>
+        <title>Blog | Uno Pro Services</title>
+        <meta
+          name="description"
+          content="Lawn care, snow shoveling, and property maintenance tips for Chicago homeowners."
+        />
+        <link rel="canonical" href="https://unoproservices.com/blog" />
+      </Helmet>
+
+      {/* HERO */}
+      <section className="relative h-[300px] sm:h-[350px] md:h-[400px] flex items-center bg-black">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/banner2.jpg')" }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40"></div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl">
+            <h1
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-white"
+              style={{
+                textShadow:
+                  '3px 3px 12px rgba(0,0,0,0.95), 0 0 30px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.8)'
+              }}
+            >
+              Chicago Lawn & Property Blog
+            </h1>
+
+            <p
+              className="text-base sm:text-lg md:text-xl text-white"
+              style={{
+                textShadow:
+                  '2px 2px 10px rgba(0,0,0,0.95), 0 0 25px rgba(0,0,0,0.9), 0 0 35px rgba(0,0,0,0.7)'
+              }}
+            >
+              Lawn care, snow service, and seasonal property tips for Chicago homeowners
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* BLOG LIST */}
+      <section className="py-12 sm:py-16 md:py-20">
+        <div className="container mx-auto px-4 max-w-5xl">
+          {currentPosts.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-xl text-gray-600">No blog posts found.</p>
+            </div>
+          ) : (
+            <div className="space-y-8 sm:space-y-10">
+              {currentPosts.map((post) => (
+                <Link
+                  key={post.id}
+                  to={`/blog/${post.slug}`}
+                  className="bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden block"
+                >
+                  <div className="p-6 sm:p-8">
+                    <div className="flex items-center gap-2 text-gray-600 text-sm mb-3">
+                      <Calendar size={16} />
+                      <time dateTime={post.date}>{formatDate(post.date)}</time>
+                    </div>
+
+                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4 hover:text-brand-primary transition-colors text-left">
+                      {post.title}
+                    </h2>
+
+                    <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6 leading-relaxed text-left">
+                      {post.intro}
+                    </p>
+
+                    <div className="inline-flex items-center gap-2 bg-brand-primary text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-opacity-90 transition-all font-semibold text-sm sm:text-base shadow-md hover:shadow-lg">
+                      Read More
+                      <ArrowRight size={16} />
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {/* PAGINATION */}
+          {sortedPosts.length > 0 && totalPages > 1 && (
+            <div className="mt-12 sm:mt-16 flex flex-wrap items-center justify-center gap-2">
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className={`p-2 sm:p-3 rounded-lg transition-all ${currentPage === 1
+                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
+                  }`}
+              >
+                <ChevronLeft size={20} />
+              </button>
+
+              {renderPagination()}
+
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className={`p-2 sm:p-3 rounded-lg transition-all ${currentPage === totalPages
+                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
+                  }`}
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+          )}
+
+          {/* POSTS COUNT */}
+          <div className="mt-12 sm:mt-16 text-center">
+            <p className="text-base sm:text-lg text-gray-600 mb-4">
+              {sortedPosts.length === 0
+                ? 'Showing 0 of 0 posts'
+                : `Showing ${startIndex + 1}–${Math.min(endIndex, sortedPosts.length)} of ${sortedPosts.length} posts`}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-12 sm:py-16 bg-gray-900 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">
+            Need Lawn Care or Snow Service?
+          </h2>
+          <p className="text-base sm:text-lg text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto">
+            Get a free quote from Uno Pro Services. We serve Chicago and nearby areas.
+          </p>
+          <Link
+            to="/contact"
+            className="bg-brand-primary text-white px-8 sm:px-10 py-4 sm:py-5 rounded-lg hover:bg-opacity-90 transition-all font-semibold text-base sm:text-lg shadow-xl inline-block"
+          >
+            Get Free Quote
+          </Link>
+        </div>
+      </section>
+    </div>
+  );
+}
