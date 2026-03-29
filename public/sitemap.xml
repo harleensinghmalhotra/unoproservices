@@ -2,31 +2,52 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://unoproservices.com</loc>
+<<<<<<< HEAD
     <lastmod>2026-03-29</lastmod>
+=======
+    <lastmod>2026-02-25</lastmod>
+>>>>>>> cc75f3ce46c563745412ee95dfafbd2be5232a40
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://unoproservices.com/services</loc>
+<<<<<<< HEAD
     <lastmod>2026-03-29</lastmod>
+=======
+    <lastmod>2026-02-25</lastmod>
+>>>>>>> cc75f3ce46c563745412ee95dfafbd2be5232a40
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://unoproservices.com/gallery</loc>
+<<<<<<< HEAD
     <lastmod>2026-03-29</lastmod>
+=======
+    <lastmod>2026-02-25</lastmod>
+>>>>>>> cc75f3ce46c563745412ee95dfafbd2be5232a40
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://unoproservices.com/about</loc>
+<<<<<<< HEAD
     <lastmod>2026-03-29</lastmod>
+=======
+    <lastmod>2026-02-25</lastmod>
+>>>>>>> cc75f3ce46c563745412ee95dfafbd2be5232a40
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://unoproservices.com/contact</loc>
+<<<<<<< HEAD
     <lastmod>2026-03-29</lastmod>
+=======
+    <lastmod>2026-02-25</lastmod>
+>>>>>>> cc75f3ce46c563745412ee95dfafbd2be5232a40
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://unoproservices.com/blog</loc>
+<<<<<<< HEAD
     <lastmod>2026-03-29</lastmod>
     <priority>0.7</priority>
   </url>
@@ -141,6 +162,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+=======
+    <lastmod>2026-02-25</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+>>>>>>> cc75f3ce46c563745412ee95dfafbd2be5232a40
     <loc>https://unoproservices.com/blog/how-often-should-you-mow-your-lawn-in-chicago-weekly-vs-bi-weekly-explained</loc>
     <lastmod>2026-02-25</lastmod>
     <priority>0.6</priority>
