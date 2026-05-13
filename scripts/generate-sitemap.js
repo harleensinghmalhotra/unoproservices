@@ -17,6 +17,7 @@ async function generateSitemap() {
         { path: '/about', priority: '0.6' },
         { path: '/contact', priority: '0.7' },
         { path: '/blog', priority: '0.7' },
+        { path: '/careers', priority: '0.5' },
     ];
 
     let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
