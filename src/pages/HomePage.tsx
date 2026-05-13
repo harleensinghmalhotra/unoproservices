@@ -67,32 +67,32 @@ export default function HomePage() {
 
   const transformations = [
     {
-      before: '/After 1.png',
-      after: '/Before 1.jpg',
+      before: '/Before 1.jpg',
+      after: '/After 1.png',
       title: 'Seasonal Cleanup Transformation',
       description:
         'Full yard cleanup, edging, and refresh to restore curb appeal and prepare for the next season.',
       alt: 'Before and after yard cleanup in Chicago'
     },
     {
-      before: '/After 2.jpg',
-      after: '/Before 2.png',
+      before: '/Before 2.png',
+      after: '/After 2.jpg',
       title: 'Lawn Maintenance Results',
       description:
         'Consistent weekly mowing, trimming, and cleanup that keeps your lawn looking fresh all month.',
       alt: 'Before and after lawn maintenance in Chicago'
     },
     {
-      before: '/After 3.jpg',
-      after: '/Before 3.jpg',
+      before: '/Before 3.jpg',
+      after: '/After 3.jpg',
       title: 'Garden Bed Refresh',
       description:
         'Cleaned up beds, removed weeds, added mulch, and replanted for a clean, vibrant look.',
       alt: 'Garden bed cleanup and mulching before and after'
     },
     {
-      before: '/After 4.jpg',
-      after: '/Before 4.jpg',
+      before: '/Before 4.jpg',
+      after: '/After 4.jpg',
       title: 'Fall Leaf Removal',
       description:
         'Leaf cleanup and hauling service that leaves your yard clean, safe, and ready for winter.',
@@ -158,16 +158,16 @@ export default function HomePage() {
             "priceRange": "$$",
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "364 W 25th St",
+              "streetAddress": "4139 S Halsted St",
               "addressLocality": "Chicago",
               "addressRegion": "IL",
-              "postalCode": "60616",
+              "postalCode": "60609",
               "addressCountry": "US"
             },
             "geo": {
               "@type": "GeoCoordinates",
-              "latitude": 41.8475,
-              "longitude": -87.6367
+              "latitude": 41.8190034,
+              "longitude": -87.6455435
             },
             "openingHoursSpecification": [
               {
@@ -396,6 +396,9 @@ export default function HomePage() {
               <img
                 src="/whychooseus-new.jpg"
                 alt="Professional lawn care and property services in Chicago"
+                width={1200}
+                height={800}
+                loading="lazy"
                 className="rounded-2xl shadow-2xl w-full h-[300px] sm:h-[400px] md:h-[500px] object-cover"
               />
             </div>
@@ -474,25 +477,33 @@ export default function HomePage() {
             </div>
 
             <button
+              type="button"
               onClick={prevTestimonial}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-4 bg-white p-2 sm:p-3 rounded-full shadow-lg hover:bg-brand-primary hover:text-white transition-all"
+              aria-label="Previous testimonial"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-4 bg-white p-2 sm:p-3 rounded-full shadow-lg hover:bg-brand-primary hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary transition-all"
             >
-              <ChevronLeft size={20} className="sm:w-6 sm:h-6" />
+              <ChevronLeft size={20} className="sm:w-6 sm:h-6" aria-hidden="true" />
             </button>
 
             <button
+              type="button"
               onClick={nextTestimonial}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-4 bg-white p-2 sm:p-3 rounded-full shadow-lg hover:bg-brand-primary hover:text-white transition-all"
+              aria-label="Next testimonial"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-4 bg-white p-2 sm:p-3 rounded-full shadow-lg hover:bg-brand-primary hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary transition-all"
             >
-              <ChevronRight size={20} className="sm:w-6 sm:h-6" />
+              <ChevronRight size={20} className="sm:w-6 sm:h-6" aria-hidden="true" />
             </button>
 
-            <div className="flex justify-center gap-2 mt-6 sm:mt-8">
+            <div className="flex justify-center gap-2 mt-6 sm:mt-8" role="tablist" aria-label="Testimonial selection">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
+                  type="button"
+                  role="tab"
+                  aria-selected={index === currentTestimonial}
+                  aria-label={`Go to testimonial ${index + 1}`}
                   onClick={() => setCurrentTestimonial(index)}
-                  className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${index === currentTestimonial ? 'bg-brand-primary w-6 sm:w-8' : 'bg-gray-300'
+                  className={`h-3 sm:h-4 rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary ${index === currentTestimonial ? 'bg-brand-primary w-8 sm:w-10' : 'bg-gray-300 w-3 sm:w-4'
                     }`}
                 />
               ))}

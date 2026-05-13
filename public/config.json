@@ -3,15 +3,17 @@
   "siteInfo": {
     "name": "Uno Pro Services",
     "phone": "(773) 376-8058",
+    "phoneRaw": "+17733768058",
     "email": "unoproservices@gmail.com",
-    "address": "Chicagoland, IL",
-    "city": "Chicagoland",
+    "address": "4139 S Halsted St",
+    "city": "Chicago",
     "state": "IL",
-    "zip": "",
-    "mapLink": "https://maps.app.goo.gl/e5f8QVjDc6MjJyYH9",
+    "zip": "60609",
+    "mapLink": "https://www.google.com/maps/place/?q=place_id:ChIJ2Zl5lTssDogRUi4x8WjhNuU",
     "hours": [
-      "Mon - Sat: By Appointment",
-      "Emergency Service Available"
+      "Mon - Fri: 8:00 AM - 5:00 PM",
+      "Saturday: 8:00 AM - 12:00 PM",
+      "Sunday: Closed"
     ]
   }
 }
